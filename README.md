@@ -32,6 +32,20 @@ The system is split into three distinct logical schemas inside the `IPL_MDM` dat
 
 ---
 
+## 💾 Dataset Information
+
+Because the raw IPL ball-by-ball dataset exceeds GitHub's web upload limits, the data is hosted externally. 
+
+* **Source:** [Kaggle - IPL Complete Dataset (2008-2020) by Patrickb1912](https://www.kaggle.com/datasets/patrickb1912/ipl-complete-dataset-20082020)
+* **Ingestion Method:** Files are loaded directly into an external cloud landing zone/stage before execution of the Snowflake copy commands.
+
+### Source Schema Overview
+The dataset contains two primary data sources that act as the foundation for our Medallion Pipeline:
+1. `IPL Matches 2008-2020.csv` — Contains high-level match summaries, venues, dates, toss decisions, and match winners.
+2. `IPL Ball-by-Ball 2008-2020.csv` — Deeply detailed, granular ball-by-ball event data used for running our complex Silver transformation and Gold analytics layer.
+
+---
+
 ## 🛠️ Key Engineering Implementations
 
 * **Defensive SQL Architecture:** Implemented `NULLIF()` constraints across all metric division calculations (such as Strike Rates, Batting Averages, and Bowling Averages) to completely eliminate the risk of runtime **`Division-by-Zero`** errors.
